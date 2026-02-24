@@ -89,7 +89,8 @@ class RelayerService {
             const tx = this.db.getTransaction(txHash);
 
             if (!tx) {
-                return res.status(404).json({ error: 'Transaction not found' });
+                res.status(404).json({ error: 'Transaction not found' });
+                return;
             }
 
             res.json(tx);
