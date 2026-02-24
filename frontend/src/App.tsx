@@ -23,7 +23,7 @@ function App() {
                         Cross-Chain Bridge
                     </h1>
                     <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                        Seamlessly transfer tokens between Ethereum Sepolia and Polygon Mumbai
+                        Seamlessly transfer tokens between Ethereum Sepolia and Polygon Amoy
                         using cryptographic proofs and trustless verification
                     </p>
                 </div>
@@ -34,8 +34,8 @@ function App() {
                         <button
                             onClick={() => setActiveTab('bridge')}
                             className={`flex items-center gap-2 px-6 py-3 rounded-md transition-all ${activeTab === 'bridge'
-                                    ? 'bg-blue-600 text-white shadow-lg'
-                                    : 'text-gray-400 hover:text-white'
+                                ? 'bg-blue-600 text-white shadow-lg'
+                                : 'text-gray-400 hover:text-white'
                                 }`}
                         >
                             <ArrowRightLeft size={20} />
@@ -44,8 +44,8 @@ function App() {
                         <button
                             onClick={() => setActiveTab('history')}
                             className={`flex items-center gap-2 px-6 py-3 rounded-md transition-all ${activeTab === 'history'
-                                    ? 'bg-blue-600 text-white shadow-lg'
-                                    : 'text-gray-400 hover:text-white'
+                                ? 'bg-blue-600 text-white shadow-lg'
+                                : 'text-gray-400 hover:text-white'
                                 }`}
                             disabled={!isConnected}
                         >
@@ -55,8 +55,8 @@ function App() {
                         <button
                             onClick={() => setActiveTab('stats')}
                             className={`flex items-center gap-2 px-6 py-3 rounded-md transition-all ${activeTab === 'stats'
-                                    ? 'bg-blue-600 text-white shadow-lg'
-                                    : 'text-gray-400 hover:text-white'
+                                ? 'bg-blue-600 text-white shadow-lg'
+                                : 'text-gray-400 hover:text-white'
                                 }`}
                         >
                             <BarChart3 size={20} />
@@ -115,7 +115,7 @@ function App() {
                 <footer className="mt-16 text-center text-gray-500 text-sm">
                     <p>Built with ❤️ for the decentralized future</p>
                     <p className="mt-2">
-                        Powered by Ethereum Sepolia & Polygon Mumbai Testnets
+                        Powered by Ethereum Sepolia & Polygon Amoy Testnets
                     </p>
                 </footer>
             </main>

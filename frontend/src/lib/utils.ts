@@ -41,7 +41,7 @@ export function formatDate(timestamp: number): string {
 export function getExplorerUrl(chainId: number, txHash: string): string {
     const explorers: Record<number, string> = {
         11155111: 'https://sepolia.etherscan.io/tx',
-        80001: 'https://mumbai.polygonscan.com/tx',
+        80002: 'https://amoy.polygonscan.com/tx',
     };
 
     const baseUrl = explorers[chainId] || '';
@@ -54,7 +54,7 @@ export function getExplorerUrl(chainId: number, txHash: string): string {
 export function getAddressExplorerUrl(chainId: number, address: string): string {
     const explorers: Record<number, string> = {
         11155111: 'https://sepolia.etherscan.io/address',
-        80001: 'https://mumbai.polygonscan.com/address',
+        80002: 'https://amoy.polygonscan.com/address',
     };
 
     const baseUrl = explorers[chainId] || '';
@@ -80,7 +80,7 @@ export function formatNumber(num: number): string {
  */
 export function getEstimatedTime(sourceChain: number): string {
     // Sepolia: ~15s block time, 3 confirmations = ~45s
-    // Mumbai: ~2s block time, 5 confirmations = ~10s
+    // Amoy: ~2s block time, 5 confirmations = ~10s
     // Plus relayer processing time ~30s
 
     if (sourceChain === 11155111) {
@@ -96,7 +96,7 @@ export function getEstimatedTime(sourceChain: number): string {
 export function getChainName(chainId: number): string {
     const names: Record<number, string> = {
         11155111: 'Sepolia',
-        80001: 'Mumbai',
+        80002: 'Amoy',
     };
 
     return names[chainId] || 'Unknown';
@@ -108,7 +108,7 @@ export function getChainName(chainId: number): string {
 export function getNativeCurrency(chainId: number): string {
     const currencies: Record<number, string> = {
         11155111: 'ETH',
-        80001: 'MATIC',
+        80002: 'MATIC',
     };
 
     return currencies[chainId] || 'ETH';

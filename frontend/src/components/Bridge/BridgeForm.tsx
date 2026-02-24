@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAccount, useBalance, useWriteContract, useWaitForTransactionReceipt, useSwitchChain } from 'wagmi';
-import { sepolia, polygonMumbai } from 'wagmi/chains';
+import { sepolia, polygonAmoy } from 'wagmi/chains';
 import { parseEther } from 'viem';
 import toast from 'react-hot-toast';
 import { ArrowDown, Loader2, ExternalLink } from 'lucide-react';
@@ -13,12 +13,12 @@ export function BridgeForm() {
     const { switchChain } = useSwitchChain();
 
     const [amount, setAmount] = useState('');
-    const [sourceChain, setSourceChain] = useState<'sepolia' | 'mumbai'>('sepolia');
+    const [sourceChain, setSourceChain] = useState<'sepolia' | 'amoy'>('sepolia');
     const [recipient, setRecipient] = useState('');
 
-    const destChain = sourceChain === 'sepolia' ? 'mumbai' : 'sepolia';
-    const sourceChainId = sourceChain === 'sepolia' ? sepolia.id : polygonMumbai.id;
-    const destChainId = destChain === 'mumbai' ? polygonMumbai.id : sepolia.id;
+    const destChain = sourceChain === 'sepolia' ? 'amoy' : 'sepolia';
+    const sourceChainId = sourceChain === 'sepolia' ? sepolia.id : polygonAmoy.id;
+    const destChainId = destChain === 'amoy' ? polygonAmoy.id : sepolia.id;
 
     // Get balances
     const { data: sourceBalance } = useBalance({
@@ -56,7 +56,7 @@ export function BridgeForm() {
 
         // Check if on correct chain
         if (chain?.id !== sourceChainId) {
-            toast.error(`Please switch to ${sourceChain === 'sepolia' ? 'Sepolia' : 'Mumbai'}`);
+            toast.error(`Please switch to ${sourceChain === 'sepolia' ? 'Sepolia' : 'Amoy'}`);
             switchChain?.({ chainId: sourceChainId });
             return;
         }
@@ -114,7 +114,7 @@ export function BridgeForm() {
 
     // Swap source and destination
     const handleSwap = () => {
-        setSourceChain(sourceChain === 'sepolia' ? 'mumbai' : 'sepolia');
+        setSourceChain(sourceChain === 'sepolia' ? 'amoy' : 'sepolia');
     };
 
     return (
@@ -128,11 +128,11 @@ export function BridgeForm() {
                     <div className="flex justify-between items-center mb-3">
                         <select
                             value={sourceChain}
-                            onChange={(e) => setSourceChain(e.target.value as 'sepolia' | 'mumbai')}
+                            onChange={(e) => setSourceChain(e.target.value as 'sepolia' | 'amoy')}
                             className="bg-gray-800 text-white px-4 py-2 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500"
                         >
                             <option value="sepolia">Ethereum Sepolia</option>
-                            <option value="mumbai">Polygon Mumbai</option>
+                            <option value="amoy">Polygon Amoy</option>
                         </select>
                         {sourceBalance && (
                             <span className="text-sm text-gray-400">
@@ -178,7 +178,7 @@ export function BridgeForm() {
                 <div className="bg-gray-900 border border-gray-700 rounded-lg p-4">
                     <div className="flex justify-between items-center mb-3">
                         <div className="bg-gray-800 text-white px-4 py-2 rounded-lg border border-gray-600">
-                            {destChain === 'mumbai' ? 'Polygon Mumbai' : 'Ethereum Sepolia'}
+                            {destChain === 'amoy' ? 'Polygon Amoy' : 'Ethereum Sepolia'}
                         </div>
                         {destBalance && (
                             <span className="text-sm text-gray-400">
@@ -221,7 +221,7 @@ export function BridgeForm() {
                 </div>
                 <div className="flex justify-between text-sm">
                     <span className="text-gray-400">You Will Receive</span>
-                    <span className="text-white">{amount || '0.0'} {destChain === 'mumbai' ? 'wSepETH' : 'ETH'}</span>
+                    <span className="text-white">{amount || '0.0'} {destChain === 'amoy' ? 'wSepETH' : 'ETH'}</span>
                 </div>
             </div>
 
@@ -239,7 +239,7 @@ export function BridgeForm() {
                 ) : !isConnected ? (
                     'Connect Wallet'
                 ) : (
-                    `Bridge to ${destChain === 'mumbai' ? 'Mumbai' : 'Sepolia'}`
+                    `Bridge to ${destChain === 'amoy' ? 'Amoy' : 'Sepolia'}`
                 )}
             </button>
 

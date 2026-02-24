@@ -13,7 +13,7 @@ export function Header() {
                         </div>
                         <div>
                             <h1 className="text-xl font-bold text-white">Cross-Chain Bridge</h1>
-                            <p className="text-xs text-gray-400">Sepolia ↔ Mumbai</p>
+                            <p className="text-xs text-gray-400">Sepolia ↔ Amoy</p>
                         </div>
                     </div>
 

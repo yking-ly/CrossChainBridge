@@ -7,7 +7,7 @@ const mockTransactions = [
         id: '1',
         txHash: '0x1234...5678',
         sourceChain: 'sepolia',
-        destChain: 'mumbai',
+        destChain: 'amoy',
         amount: '0.5',
         status: 'completed',
         timestamp: Date.now() - 3600000,
@@ -16,7 +16,7 @@ const mockTransactions = [
     {
         id: '2',
         txHash: '0x9876...5432',
-        sourceChain: 'mumbai',
+        sourceChain: 'amoy',
         destChain: 'sepolia',
         amount: '0.25',
         status: 'processing',
@@ -71,7 +71,7 @@ export function TransactionHistory() {
                                         {tx.amount} ETH
                                     </p>
                                     <p className="text-sm text-gray-400">
-                                        {tx.sourceChain === 'sepolia' ? 'Sepolia' : 'Mumbai'} → {tx.destChain === 'mumbai' ? 'Mumbai' : 'Sepolia'}
+                                        {tx.sourceChain === 'sepolia' ? 'Sepolia' : 'Amoy'} → {tx.destChain === 'amoy' ? 'Amoy' : 'Sepolia'}
                                     </p>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@ export function TransactionHistory() {
                             </a>
                             {tx.destTxHash && (
                                 <a
-                                    href={`https://mumbai.polygonscan.com/tx/${tx.destTxHash}`}
+                                    href={`https://amoy.polygonscan.com/tx/${tx.destTxHash}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="text-blue-400 hover:text-blue-300 flex items-center gap-1"
