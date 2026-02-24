@@ -205,17 +205,22 @@ export class EventListener {
             const currentSepoliaBlock = await this.sepoliaProvider.getBlockNumber();
             const currentamoyBlock = await this.amoyProvider.getBlockNumber();
 
-            const fromSepoliaBlock = Math.max(0, currentSepoliaBlock - 10);
-            const fromamoyBlock = Math.max(0, currentamoyBlock - 10);
+            // Use small block range (5) to stay within Alchemy free tier limits
+            const fromSepoliaBlock = Math.max(0, currentSepoliaBlock - 5);
+            const fromamoyBlock = Math.max(0, currentamoyBlock - 5);
 
-            // Query Sepolia events
-            const sepoliaEvents = await this.vaultContract.queryFilter(
-                'BridgingInitiated',
-                fromSepoliaBlock,
-                currentSepoliaBlock
-            );
-
-            logger.info(`Found ${sepoliaEvents.length} historical BridgingInitiated events on Sepolia`);
+            // Query Sepolia events - isolated so failure doesn't block Amoy
+            let sepoliaEvents: any[] = [];
+            try {
+                sepoliaEvents = await this.vaultContract.queryFilter(
+                    'BridgingInitiated',
+                    fromSepoliaBlock,
+                    currentSepoliaBlock
+                );
+                logger.info(`Found ${sepoliaEvents.length} historical BridgingInitiated events on Sepolia`);
+            } catch (err) {
+                logger.warn('Could not fetch Sepolia historical events (Alchemy free tier limit) - live events will still work');
+            }
 
             for (const event of sepoliaEvents) {
                 if (!('args' in event)) continue;
@@ -245,14 +250,18 @@ export class EventListener {
                 }
             }
 
-            // Query amoy events
-            const amoyEvents = await this.tokenContract.queryFilter(
-                'TokensBurned',
-                fromamoyBlock,
-                currentamoyBlock
-            );
-
-            logger.info(`Found ${amoyEvents.length} historical TokensBurned events on amoy`);
+            // Query Amoy events - isolated so failure doesn't block Sepolia
+            let amoyEvents: any[] = [];
+            try {
+                amoyEvents = await this.tokenContract.queryFilter(
+                    'TokensBurned',
+                    fromamoyBlock,
+                    currentamoyBlock
+                );
+                logger.info(`Found ${amoyEvents.length} historical TokensBurned events on amoy`);
+            } catch (err) {
+                logger.warn('Could not fetch Amoy historical events (Alchemy free tier limit) - live events will still work');
+            }
 
             for (const event of amoyEvents) {
                 if (!('args' in event)) continue;
