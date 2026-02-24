@@ -26,7 +26,7 @@ const mockTransactions = [
 ];
 
 export function TransactionHistory() {
-    const { address, isConnected } = useAccount();
+    const { isConnected } = useAccount();
 
     if (!isConnected) {
         return (
@@ -80,8 +80,8 @@ export function TransactionHistory() {
                                     {new Date(tx.timestamp).toLocaleString()}
                                 </p>
                                 <p className={`text-sm font-medium ${tx.status === 'completed' ? 'text-green-500' :
-                                        tx.status === 'processing' ? 'text-yellow-500' :
-                                            'text-red-500'
+                                    tx.status === 'processing' ? 'text-yellow-500' :
+                                        'text-red-500'
                                     }`}>
                                     {tx.status.charAt(0).toUpperCase() + tx.status.slice(1)}
                                 </p>

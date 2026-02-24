@@ -1,5 +1,5 @@
 import { useReadContract } from 'wagmi';
-import { sepolia, polygonMumbai } from 'wagmi/chains';
+import { sepolia, polygonAmoy } from 'wagmi/chains';
 import { CONTRACTS } from '../../lib/wagmi';
 import { BRIDGE_VAULT_ABI, BRIDGE_TOKEN_ABI } from '../../lib/contracts';
 import { formatAmount, formatNumber } from '../../lib/utils';
@@ -16,10 +16,10 @@ export function Stats() {
 
     // Get Mumbai token stats
     const { data: tokenStats } = useReadContract({
-        address: CONTRACTS.mumbai.bridgeToken,
+        address: CONTRACTS.amoy.bridgeToken,
         abi: BRIDGE_TOKEN_ABI,
         functionName: 'getStats',
-        chainId: polygonMumbai.id,
+        chainId: polygonAmoy.id,
     });
 
     const totalLocked = vaultStats ? formatAmount(vaultStats[0]) : '0';
@@ -98,11 +98,11 @@ export function Stats() {
                         </div>
                     </div>
 
-                    {/* Mumbai Stats */}
+                    {/* Amoy Stats */}
                     <div>
                         <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                             <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                            Polygon Mumbai
+                            Polygon Amoy
                         </h3>
                         <div className="grid grid-cols-2 gap-4">
                             <div className="bg-gray-900 rounded-lg p-4">
